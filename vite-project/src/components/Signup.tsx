@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+
 const Signup: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,7 +19,7 @@ const Signup: React.FC = () => {
       password,
     };
 
-    axios.post('http://127.0.0.1:8000/auth/register/', user)
+    axios.post('http://127.0.0.1:8000/api/register/', user)
       .then(response => {
         localStorage.setItem('authToken', response.data.access_token);
         window.location.href = '/dashboard';

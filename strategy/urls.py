@@ -4,5 +4,5 @@ from .views import save_strategy
 name = ['strategies']
 
 urlpatterns = [
-    path('api/save_strategy/', save_strategy.as_view(), name='strategy'),
+    path('api/save_strategy/', save_strategy, name='strategy'),
 ]

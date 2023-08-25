@@ -1,23 +1,22 @@
-
-forex_pairs = [
+const forex_pairs = [
     'eurusd', 'usdjpy', 'gbpusd', 'usdcad', 'usdchf', 'nzdusd', 'gbpjpy',
     'audusd', 'usdaud', 'euraud', 'eurjpy', 'usdzar', 'usdsgd', 'usdnok',
     'usdsek', 'usdtry', 'eurtry', 'usdhkd', 'usdmxn', 'eurcad'
 ]
 
-famous_stock_tickers = {
+const famous_stock_tickers = {
     'Apple': 'aapl', 'Microsoft': 'msft', 'Amazon': 'amzn', 'Google': 'goog', 'Facebook': 'fb',
     'Berkshire Hathaway': 'brk.b', 'Alibaba': 'baba', 'Johnson & Johnson': 'jnj', 'JPMorgan Chase': 'jpm',
     'Visa': 'v', 'Procter & Gamble': 'pg', 'UnitedHealth': 'unh', 'Mastercard': 'ma', 'AT&T': 't',
     'Home Depot': 'hd', 'Intel': 'intc', 'Verizon': 'vz', 'Tencent': 'tcehy', 'Exxon Mobil': 'xom'
 }
 
-market_indices = [
+const market_indices = [
     'S&P 500', 'Dow Jones Industrial Average', 'Nasdaq Composite', 'FTSE 100', 'Nikkei 225',
     'Shanghai Composite', 'DAX', 'CAC 40', 'ASX 200', 'Hang Seng Index'
 ]
 
-famous_crypto_tickers = [
+const famous_crypto_tickers = [
     'btc', 'eth', 'bnb', 'ada', 'usdt', 'sol', 'xrp', 'dot', 'doge', 'usdc',
     'avax', 'uni', 'busd', 'link', 'ltc', 'luna', 'matic', 'wbtc', 'atom', 'etc',
     'fil', 'vet', 'bch', 'algo', 'icp', 'xlm', 'trx', 'eos', 'aave', 'xtz',
@@ -28,30 +27,71 @@ famous_crypto_tickers = [
     'ankr', 'hot', 'nexo', 'pax', 'rune', 'dcr', 'crv', '1inch', 'btg', 'lpt'
 ]
 
+const ASSET_CLASSES = [
+  'Stocks',
+  'Commodities',
+  'Currencies',
+];
 
-const Step2 = ({ nextStep, prevStep, selectedAssetClass }) => {
+const ASSET_NAME_CHOICES = {
+  equities: ['Apple Inc', 'Microsoft', 'Amazon', 'Google'],
+  bonds: ['US Treasury Bond', 'Corporate Bond', 'Municipal Bond'],
+  commodities: ['Gold', 'Silver', 'Oil', 'Natural Gas'],
+  currencies: ['EURUSD', 'GBPUSD', 'USDJPY', 'GBPJPY', 'USDCHF', 'NZDUSD'],
+};
+
+
+const Step1 = ({ nextStep }) => {
+  const [selectedAssetClass, setSelectedAssetClass] = React.useState<string>('');
   const [selectedAssetNames, setSelectedAssetNames] = React.useState<string[]>([]);
   const assetNames = ASSET_NAME_CHOICES[selectedAssetClass.toLowerCase()] || [];
 
+  const selectAssetClass = (assetClass: string) => {
+    setSelectedAssetClass(assetClass);
+  };
+
   const handleCheck = (name: string, isChecked: boolean) => {
-    // ...
+    if (isChecked) {
+      setSelectedAssetNames([...selectedAssetNames, name]);
+    } else {
+      setSelectedAssetNames(selectedAssetNames.filter(item => item !== name));
+    }
   };
 
   return (
     <div className="step-container">
-      <h2>Asset Names</h2>
-      <div className="custom-checkbox">
-        {assetNames.map((name, index) => (
-          // ...
+      <h2>Select Asset Class</h2>
+      <div className="asset-classes">
+        {Object.keys(ASSET_CLASSES).map((assetClass) => (
+          <button onClick={() => selectAssetClass(assetClass)}>
+            {assetClass}
+          </button>
         ))}
       </div>
-      <button onClick={prevStep}>Previous</button>
-      <button onClick={() => nextStep(selectedAssetNames)}>Next</button>
+      {selectedAssetClass && (
+        <>
+          <h2>Asset Names for {selectedAssetClass}</h2>
+          <div className="custom-checkbox">
+            {assetNames.map((name, index) => (
+              <div key={index}>
+                <input
+                  type="checkbox"
+                  id={`asset-name-${index}`}
+                  onChange={(e) => handleCheck(name, e.target.checked)}
+                />
+                <label htmlFor={`asset-name-${index}`}>{name}</label>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+      <button onClick={() => nextStep(selectedAssetClass, selectedAssetNames)}>Next</button>
     </div>
   );
 };
 
-const Step3 = ({ nextStep, prevStep }) => {
+
+const Step2 = ({ nextStep, prevStep }) => {
   const [selectedTradingFrequency, setSelectedTradingFrequency] = useState('');
 
   const handleOptionClick = (value) => {
@@ -122,7 +162,7 @@ const Step8 = ({
   };
 
   return (
-    <div className="step-container">
+    <div className="stefp-container">
       <h2>Your Long Entry Signals</h2>
       <div className="signal-selection">
         <List className="signal-options">
@@ -191,10 +231,10 @@ const StrategyWizard: React.FC = () => {
   const [selectedLongEntrySignals, setSelectedLongEntrySignals] = useState<string[]>([]);
   const [selectedShortEntrySignals, setSelectedShortEntrySignals] = useState<string[]>([]);
 
+  const [SelectedMachineLearningFeatures, setSelectedMachineLearningFeatures] = useState<string[]>([]);
 
   const handleSubmit = () => {
     const strategyData = {
-      selectedAssetClass,
       selectedAssetNames,
       selectedTradingFrequency,
       selectedRiskTolerance,
@@ -203,7 +243,7 @@ const StrategyWizard: React.FC = () => {
       selectedTechnicalFeatures,
       selectedLongEntrySignals,
       selectedShortEntrySignals,
-      // add other selections here as needed
+      SelectedMachineLearningFeatures,
     };
     const isAuthenticated = false;
 
@@ -228,31 +268,30 @@ const StrategyWizard: React.FC = () => {
     if (value) {
       switch (currentStep) {
         case 1:
-          setSelectedAssetClass(value as string);
-          break;
-        case 2:
           setSelectedAssetNames(value as string[]);
           break;
-        case 3:
+        case 2:
           setSelectedTradingFrequency(value as string[]);
           break;
-        case 4:
+        case 3:
           setSelectedRiskTolerance(value as string[]);
           break;
-        case 5:
+        case 4:
           setSelectedFundamentalFeatures(value as string[]);
           break;
-        case 6:
+        case 5:
           setSelectedSentimentFeatures(value as string[]);
           break;
-        case 7:
+        case 6:
           setSelectedTechnicalFeatures(value as string[]);
           break;
-        case 8:
+        case 7:
           setSelectedLongEntrySignals(value as string[]);
           break;
-        case 9:
+        case 8:
           setSelectedShortEntrySignals(value as string[]);
+        case 9:
+          setSelectedMachineLearningFeatures(value as string[]);
         default:
           break;
       }
@@ -272,16 +311,15 @@ const StrategyWizard: React.FC = () => {
     <div>
         {transitions((style, item, key) => (
             <animated.div style={style}>
-                {item === 1 && <Step1 nextStep={value => nextStep(value)} />}
-                {item === 2 && <Step2 nextStep={value => nextStep(value)} prevStep={prevStep} selectedAssetClass={selectedAssetClass} />}
-              {currentStep === 3 && <Step3 nextStep={(value) => nextStep(value)} prevStep={prevStep} />}
-              {currentStep === 4 && <Step4 nextStep={(value) => nextStep(value)} prevStep={prevStep} />}
-              {currentStep === 5 && <Step5 nextStep={value => nextStep(value)} prevStep={prevStep} selectedAssetClass={selectedAssetClass} />}
-              {currentStep === 6 && <Step6 nextStep={value => nextStep(value)} prevStep={prevStep} selectedAssetClass={selectedAssetClass} />}
-              {currentStep === 7 && <Step7 nextStep={value => nextStep(value)} prevStep={prevStep} />}
-              {currentStep === 8 && <Step8 nextStep={(value) => nextStep(value)} prevStep={prevStep} selectedFundamentalFeatures={selectedFundamentalFeatures} selectedSentimentFeatures={selectedSentimentFeatures} selectedTechnicalFeatures={selectedTechnicalFeatures} />}
-              {currentStep === 9 && <Step9 nextStep={(value) => nextStep(value)} prevStep={prevStep} selectedFundamentalFeatures={selectedFundamentalFeatures} selectedSentimentFeatures={selectedSentimentFeatures} selectedTechnicalFeatures={selectedTechnicalFeatures} />}
-              {currentStep === 10 && <SummaryStep nextStep={handleSubmit} prevStep={prevStep} selectedAssetClass={selectedAssetClass} selectedAssetNames={selectedAssetNames} selectedFeatures={selectedFeatures} prevStep={prevStep} selectedAssetClass={selectedAssetClass} selectedAssetNames={selectedAssetNames} selectedLongEntrySignals={selectedLongEntrySignals} selectedShortEntrySignals={selectedShortEntrySignals}/>}
+              {item === 1 && <Step1 nextStep={value => nextStep(value)} prevStep={prevStep} />}
+              {item === 2 && <Step2 nextStep={(value) => nextStep(value)} prevStep={prevStep} />}
+              {item === 3 && <Step3 nextStep={(value) => nextStep(value)} prevStep={prevStep} />}
+              {item === 4 && <Step4 nextStep={value => nextStep(value)} prevStep={prevStep} selectedAssetClass={selectedAssetClass} />}
+              {item === 5 && <Step5 nextStep={value => nextStep(value)} prevStep={prevStep} selectedAssetClass={selectedAssetClass} />}
+              {item === 6 && <Step6 nextStep={value => nextStep(value)} prevStep={prevStep} />}
+              {item === 7 && <Step7 nextStep={(value) => nextStep(value)} prevStep={prevStep} selectedFundamentalFeatures={selectedFundamentalFeatures} selectedSentimentFeatures={selectedSentimentFeatures} selectedTechnicalFeatures={selectedTechnicalFeatures} />}
+              {item === 8 && <Step8 nextStep={(value) => nextStep(value)} prevStep={prevStep} selectedFundamentalFeatures={selectedFundamentalFeatures} selectedSentimentFeatures={selectedSentimentFeatures} selectedTechnicalFeatures={selectedTechnicalFeatures} />}
+              {item === 9 && <Step9 nextStep={handleSubmit} prevStep={prevStep} selectedAssetClass={selectedAssetClass} selectedAssetNames={selectedAssetNames} selectedFeatures={selectedFeatures} prevStep={prevStep} selectedAssetClass={selectedAssetClass} selectedAssetNames={selectedAssetNames} selectedLongEntrySignals={selectedLongEntrySignals} selectedShortEntrySignals={selectedShortEntrySignals}/>}
             </animated.div>
         ))}
     </div>

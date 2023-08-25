@@ -3,7 +3,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from strategy.models import Strategy
 from rest_framework import status
-from backtest.tasks import run_backtest_for_strategy
 
 
 @api_view(['POST'])

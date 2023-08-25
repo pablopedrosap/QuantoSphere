@@ -16,6 +16,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5174', 'http://localhost:5173',
+]
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -27,9 +31,7 @@ INSTALLED_APPS = [
     'user',
     'strategy',
     'backtest',
-    'broker',
     'trading',
-    'base',
     'channels',
     'corsheaders',
     'rest_framework',
@@ -113,20 +115,21 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/Users/pablopedrosa/PycharmProjects/QuantoSphere/logfile.log',
+            'filename': '/Users/pablopedrosa/PycharmProjects/backend/logfile.log',
         },
     },
-    'root': {
-        'handlers': ['console', 'file'],
-        'level': 'DEBUG',
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
     },
 }
+
 AUTH_USER_MODEL = 'user.CustomUser'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
