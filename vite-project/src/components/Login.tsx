@@ -10,7 +10,7 @@ const Login: React.FC = () => {
     e.preventDefault();
 
     axios
-      .post('http://127.0.0.1:8000/api/login/', { email, password })
+      .post('http://127.0.0.1:8000/user/api/login/', { email, password })
       .then((response) => {
         const { access_token } = response.data;
         localStorage.setItem('authToken', access_token);

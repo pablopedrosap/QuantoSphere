@@ -19,7 +19,7 @@ const Signup: React.FC = () => {
       password,
     };
 
-    axios.post('http://127.0.0.1:8000/api/register/', user)
+    axios.post('http://127.0.0.1:8000/user/api/register/', user)
       .then(response => {
         localStorage.setItem('authToken', response.data.access_token);
         window.location.href = '/dashboard';

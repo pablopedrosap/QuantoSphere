@@ -1,3 +1,6 @@
+import React, { useState } from 'react';
+import { useTransition, animated } from 'react-spring';
+
 const forex_pairs = [
     'eurusd', 'usdjpy', 'gbpusd', 'usdcad', 'usdchf', 'nzdusd', 'gbpjpy',
     'audusd', 'usdaud', 'euraud', 'eurjpy', 'usdzar', 'usdsgd', 'usdnok',
@@ -119,7 +122,7 @@ const Step2 = ({ nextStep, prevStep }) => {
 };
 
 
-const Step4 = ({ nextStep, prevStep }) => {
+const Step3 = ({ nextStep, prevStep }) => {
   const [selectedRiskTolerance, setSelectedRiskTolerance] = useState('');
 
   const handleOptionClick = (value) => {
@@ -147,7 +150,7 @@ const Step4 = ({ nextStep, prevStep }) => {
 };
 
 
-const Step8 = ({
+const Step4 = ({
   nextStep,
   prevStep,
   selectedFundamentalFeatures,

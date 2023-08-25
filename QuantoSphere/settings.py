@@ -41,7 +41,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'channels.middleware.BaseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -115,20 +114,16 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/Users/pablopedrosa/PycharmProjects/backend/logfile.log',
+        'console': {
+            'class': 'logging.StreamHandler',
         },
     },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
+    'root': {
+        'level': 'ERROR',
+        'handlers': ['console'],
     },
 }
+
 
 AUTH_USER_MODEL = 'user.CustomUser'
 
@@ -147,7 +142,6 @@ REST_FRAMEWORK = {
 }
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    # 'django.contrib.auth.backends.ModelBackend'
 )
 
 CORS_ALLOWED_METHODS = [
