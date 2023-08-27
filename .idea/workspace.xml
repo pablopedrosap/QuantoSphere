@@ -2,22 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="539d31fd-ba72-4064-95e7-fe162adb25ae" name="Changes" comment="backup for frontend and backend">
-      <change afterPath="$PROJECT_DIR$/trading/serializer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/QuantoSphere/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuantoSphere/asgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QuantoSphere/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/QuantoSphere/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backtest/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtest/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategy/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategy/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trading/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/trading/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trading/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/trading/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite-project/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/vite-project/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite-project/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/vite-project/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite-project/src/components/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/vite-project/src/components/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite-project/src/components/Signup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/vite-project/src/components/Signup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite-project/src/components/StrategyWizard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/vite-project/src/components/StrategyWizard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategy/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategy/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trading/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/trading/tasks.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692962378838</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="backup for frontend and backend">
+      <created>1692965287612</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1692965287612</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

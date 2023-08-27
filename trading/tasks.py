@@ -1,11 +1,11 @@
 import redis
+from asgiref.sync import async_to_sync
+from celery import shared_task
+from channels.layers import get_channel_layer
+from strategy.models import Strategy
 
-# Connect to your Redis instance
 redis_conn = redis.StrictRedis(host='localhost', port=6379, db=0)
-# Create a pubsub instance
 pubsub = redis_conn.pubsub()
-
-# Subscribe to a channel (replace "trade_updates" with your channel name)
 pubsub.subscribe('trade_updates')
 
 
@@ -16,7 +16,6 @@ def deploy_strategy(strategy_id, mode):
     # Start the trading process (e.g., connect to IB, initiate trades)
     strategy = Strategy.objects.get(id=strategy_id)
     strategy.parameters['action'] = mode
-
 
     def receive_update_from_message_queue():
         message = pubsub.get_message()

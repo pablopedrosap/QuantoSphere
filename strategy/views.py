@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from strategy.models import Strategy
 from rest_framework import status
-
+from backtest.tasks import run_backtest_for_strategy
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -35,4 +35,5 @@ def save_strategy(request):
         ml_model=ml_model
     )
 
+    run_backtest_for_strategy(strategy.id)
     return Response({'message': 'Strategy saved successfully'}, status=status.HTTP_201_CREATED)
