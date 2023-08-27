@@ -1,0 +1,52 @@
+.dashboard-container {
+  display: flex;
+  height: 100vh; /* Full-height */
+}
+
+.dashboard-nav {
+  flex: 0 0 220px;
+  background-color: #333;
+  color: #fff;
+  overflow-y: auto; /* Scrollable */
+  position: fixed;  /* Fixed position */
+  height: 100%;
+  top: 0; /* Stay at the top */
+  left: 0;
+}
+
+.logo-container {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.nav-links {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 10px 0;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.nav-links li a:hover {
+  background-color: #555;
+}
+
+.nav-links li a svg {
+  margin-right: 10px;
+}
+
+.dashboard-content {
+  flex: 1;
+  margin-left: 220px;  /* Same as the width of the sidenav */
+  padding: 20px;
+}
+

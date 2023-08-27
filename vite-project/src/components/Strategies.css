@@ -1,0 +1,16 @@
+
+.strategies-container {
+  padding: 20px;
+}
+
+.strategies-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.strategies-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
